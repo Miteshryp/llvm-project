@@ -1,0 +1,4 @@
+CompileFlags:
+    Add: 
+    - -I/Users/mitesh/llvm-project/llvm/include
+    - -I/Users/mitesh/llvm-project/mlir/include
