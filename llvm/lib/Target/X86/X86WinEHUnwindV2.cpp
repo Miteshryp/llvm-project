@@ -103,7 +103,8 @@ bool X86WinEHUnwindV2::runOnMachineFunction(MachineFunction &MF) {
   FunctionState State = FunctionState::InProlog;
 
   // Prolog information.
-  SmallVector<int64_t> PushedRegs;
+ // SmallVector<int64_t> PushedRegs;
+  SmallVector<Register> PushedRegs;
   bool HasStackAlloc = false;
   unsigned ApproximatePrologCodeCount = 0;
 
@@ -231,6 +232,7 @@ bool X86WinEHUnwindV2::runOnMachineFunction(MachineFunction &MF) {
             return rejectCurrentFunctionInternalError(
                 MF, Mode,
                 "The epilog is popping more registers than the prolog pushed");
+          // if (PushedRegs[PushedRegs.size() - PoppedRegCount] !=
           if (PushedRegs[PushedRegs.size() - PoppedRegCount] !=
               MI.getOperand(0).getReg())
             return rejectCurrentFunctionInternalError(
